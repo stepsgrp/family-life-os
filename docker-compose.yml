@@ -1,0 +1,15 @@
+# Local dev infrastructure. In production use Neon/Supabase Postgres and Upstash Redis.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: flos
+      POSTGRES_PASSWORD: flos
+      POSTGRES_DB: flos
+    ports: ["${POSTGRES_PORT:-5432}:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7-alpine
+    ports: ["${REDIS_PORT:-6379}:6379"]
+volumes:
+  pgdata:
